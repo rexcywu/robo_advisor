@@ -1,0 +1,26 @@
+{% extends "web/base.html" %}
+{% block content %}
+    {% if exist %}
+        <h2>Stocks</h2>
+            <table style="width:100%">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Security</th>
+                    <th>Buying Price</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                </tr>
+                {% for price, stock in object_list %}
+                    <tr>
+                    <td>{{ stock.symbol }}</td>
+                    <td>{{ stock.name }}</td>
+                    <td>{{ stock.buying_price }}</td>
+                    <td>{{ price  }}</td>
+                    <td>{{ stock.amount }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+    {% else %}
+            <h1>Create portfolio now</h1>
+    {% endif %}
+{% endblock content %}
