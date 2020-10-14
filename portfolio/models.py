@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 class Stocks(models.Model):
-    symbol = models.CharField(max_length=200, unique=True)
+    symbol = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     buying_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
