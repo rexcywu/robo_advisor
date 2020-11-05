@@ -18,16 +18,16 @@
 </head>
 <body>
     <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <nav class="navbar navbar-expand-md bg-custom navbar-dark fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" style="color:rebeccapurple;" href="{% url 'web-home' %}">Robo Advisor</a>
+          <a class="navbar-brand mr-4" style="color:rgb(33, 2, 173);" href="{% url 'web-home' %}">Tomorrow'sRobo Advisor</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{% url 'web-home' %}">Home</a>
-              <a class="nav-item nav-link" href="{% url 'web-about' %}">About</a>
+          </button> 
+          <div class="collapse navbar-collapse bg-inf" id="navbarToggle">
+            <div class="navbar-nav mr-auto" style="font-weight: bold;">
+              <a class="nav-item nav-link" href="{% url 'web-home' %}">HOME</a>
+              <a class="nav-item nav-link" href="{% url 'web-about' %}">ABOUT</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">

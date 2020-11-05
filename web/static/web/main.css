@@ -1,7 +1,8 @@
 body {
-    background: #fafafa;
+    background: #f0faff;
     color: #000000;
     margin-top: 5rem;
+    font-family: 'Poppins', sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -12,15 +13,16 @@ body {
     margin: 0;
   }
   
-  .bg-steel {
-    background-color: #fce303;
+  .bg-custom {
+    background-color: #bce2f3;
   }
+  
   
   .site-header .navbar-nav .nav-link {
     color: #000000;
   }
   
-  .site-header .navbar-nav .nav-link:hover {
+  .site-header .navbar-nav .link:hover {
     color: #000000;
   }
   
@@ -41,7 +43,7 @@ body {
   }
   
   a.article-title:hover {
-    color: #fde722;
+    color: #0375df;
     text-decoration: none;
   }
   
@@ -83,4 +85,3 @@ body {
     font-size: 2.5rem;
   }
 
-  
