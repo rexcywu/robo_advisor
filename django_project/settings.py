@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'web.apps.WebConfig',
     'crispy_forms',
+    'chartjs',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

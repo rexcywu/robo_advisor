@@ -11,6 +11,7 @@ class Stocks(models.Model):
     buying_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    coin = models.BooleanField(default=False)
 
     def __str__(self):
         return self.symbol

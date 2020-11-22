@@ -5,4 +5,5 @@ from .views import StocksListView, StocksCreateView
 urlpatterns = [
     path('create/', StocksCreateView.as_view(), name='portfolio-create'),
     path('', StocksListView.as_view(), name='portfolio-home'),
+     path('risk/', views.risk, name='portfolio-risk'),
 ]
