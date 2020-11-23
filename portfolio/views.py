@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView
 from .models import Stocks
+from .models import generateOptimalPortfolio
+from django.http import HttpResponse
 import yfinance as yf
+import numpy as np
 
 from .deep_model.predict import stock_pred
 import json
@@ -25,6 +28,7 @@ class StocksListView(ListView):
         prices = []
         intput_tensor=[]
         labels = []
+        whole_lables = []
         # today's price of stock
         for ticker, coin in zip(tickers, digit_coins):
             # today's pirce
@@ -32,6 +36,7 @@ class StocksListView(ListView):
             ticker = yf.Ticker(symbol)
             price = format(ticker.history(period="1d")["Close"][0], '.2f')
             prices.append(price)
+            whole_lables.append(symbol)
 
 
             if not coin['coin']:
@@ -44,19 +49,32 @@ class StocksListView(ListView):
                 intput_tensor.append(prices_90)
             
         # append today's price to the original context
-        context['object_list'] = list(zip(prices, context['object_list']))
+        
 
         # check if the user have created the portfolio or not
         if len(prices) == 0:
             context['exist'] = False
         else:
             context['exist'] = True
+            res = generateOptimalPortfolio()
+            result = res.main()
+            maximalReturn = str(np.around(result[0], decimals=4))
+            sharpeRatio = str(np.around(result[1], decimals=4))
+            weights = np.around(result[3], decimals=4)
+
             # use wavenet to predict the stock price of the next 3 days
             pred_stock = stock_pred(intput_tensor)
             data = {'labels':labels, 'hist_prices':pred_stock}
             context['stockdata'] = json.dumps(data)
-        
+            wholedata = {'labels':whole_lables, 'weights':list(weights)}
+            context['wholedata'] = json.dumps(wholedata)
+    
+            context['maximal'] = maximalReturn
+            context['sharpe'] = sharpeRatio
+            context['names'] = result[2]
+            context['object_list'] = list(zip(prices, weights, context['object_list']))
             
+                
         return context
 
 
@@ -78,6 +96,10 @@ class StocksCreateView(LoginRequiredMixin, CreateView):
 
 def risk(request):
     return render(request, 'portfolio/risk.html')
+
+def welcome(request):
+    return render(request, 'portfolio/welcome.html')
+
 
 
 

@@ -26,6 +26,9 @@
     }
     
     </style>
+        <h1>Optimal Portfolio</h1>
+        <h5>Maximal Return: {{ maximal }}</h5>
+        <h5>Sharpe Ratio: {{ sharpe }}</h5>        
         <h3>Stocks</h3>
             <table  class="styled-table" style="width:100%">
                 <thead>
@@ -37,7 +40,7 @@
                     <th>Amount</th>
                 </tr>
                 </thead>
-                {% for price, stock in object_list %}
+                {% for price, weight, stock in object_list %}
                     {% if not stock.coin%}
                     <tbody>
                         <tr>
@@ -45,7 +48,7 @@
                         <td>{{ stock.name }}</td>
                         <td>{{ stock.buying_price }}</td>
                         <td>{{ price  }}</td>
-                        <td>{{ stock.amount }}</td>
+                        <td>{{ weight }}</td>
                         </tr>
                     </tbody>
                     {%endif%}
@@ -62,7 +65,7 @@
                     <th>Amount</th>
                 </tr>
                 </thead>
-                {% for price, stock in object_list %}
+                {% for price, weight, stock in object_list %}
                     {% if stock.coin%}
                     <tbody>
                         <tr>
@@ -70,7 +73,7 @@
                         <td>{{ stock.name }}</td>
                         <td>{{ stock.buying_price }}</td>
                         <td>{{ price  }}</td>
-                        <td>{{ stock.amount }}</td>
+                        <td>{{ weight }}</td>
                         </tr>
                     </tbody>
                     {%endif%}
@@ -88,6 +91,7 @@
     
     <script> 
         var stock_data = JSON.parse("{{ stockdata|escapejs }}");
+        var whole_data = JSON.parse("{{ wholedata|escapejs }}");
         var var_list = [];
 
         for(var i=0; i<stock_data.labels.length; ++i){
@@ -151,13 +155,13 @@
 
 <script>
         new Chart(document.getElementById("pie-chart"), {
-        type: 'pie',
+        type: 'bar',
         data: {
-          labels: ["GOOG", "TSLA", "AAPL", "MSFT", "BTC-USD"],
+          labels: whole_data.labels,
           datasets: [{
             label: "Weight according to Total Value",
             backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-            data: [2478,5267,734,784,4133]
+            data: whole_data.weights
           }]
         },
         options: {

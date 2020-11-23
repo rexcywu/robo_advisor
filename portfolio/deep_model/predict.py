@@ -4,8 +4,6 @@ import os
 import datetime
 
 # hyperparams
-
-os.environ['KMP_DUPLICATE_LIB_OK']='True'
 N_LAGS = 90
 Y_DAYS = 3
 layer_size = 3
