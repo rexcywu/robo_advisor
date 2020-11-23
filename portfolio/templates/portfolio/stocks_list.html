@@ -28,8 +28,8 @@
     </style>
         <h1>Optimal Portfolio</h1>
         <h5>Maximal Return: {{ maximal }}</h5>
-        <h5 style="padding-bottom: 30px">Sharpe Ratio: {{ sharpe }}</h5>     
-        <h3>Assets</h3>
+        <h5 style="padding-bottom: 30px">Sharpe Ratio: {{ sharpe }}</h5>           
+        <h3>Stocks</h3>
             <table  class="styled-table" style="width:100%">
                 <thead>
                 <tr>
@@ -42,6 +42,31 @@
                 </thead>
                 {% for price, weight, stock in object_list %}
                     {% if not stock.coin%}
+                    <tbody>
+                        <tr>
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.name }}</td>
+                        <td>{{ stock.buying_price }}</td>
+                        <td>{{ price  }}</td>
+                        <td>{{ weight }}</td>
+                        </tr>
+                    </tbody>
+                    {%endif%}
+                {% endfor %}
+            </table>
+        <h3>Cryptocurrency</h3>
+            <table class="styled-table" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Buying Price</th>
+                    <th>Price</th>
+                    <th>Weight</th>
+                </tr>
+                </thead>
+                {% for price, weight, stock in object_list %}
+                    {% if stock.coin%}
                     <tbody>
                         <tr>
                         <td>{{ stock.symbol }}</td>
